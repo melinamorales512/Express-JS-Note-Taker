@@ -1,11 +1,7 @@
-//Loading data// link routes to a series of dat sources
-//this data hold arrays, waitinglist
-
 const router= require('express').Router();
-
 const fs = require('fs');
 
-//Routing
+//ROUTES
 
     router.get('/api/notes', function(req, res) {
         fs.readFile('./db.json', (err, data) => {
@@ -16,10 +12,9 @@ const fs = require('fs');
           res.send(dbData);
         })
         });
-    
 
-    //API Post Requests
-
+  
+    //POST
     router.post('/api/notes', function(req, res) {
         const userNotes = req.body;
     
@@ -44,17 +39,17 @@ const fs = require('fs');
         res.send('Thank you for your note!');
       });
 
-      //API DELETE Requests
+      // DELETE 
 
       router.delete('/api/notes/:id', function(req, res) {
-        // Gets id number of note to delete
+      
         const deleteNote = req.params.id;
         console.log(deleteNote);
     
         fs.readFile('./db.json', (err, data) => {
           if (err) throw err;
     
-          // Comparing each note's id to delete note
+        
           dbData = JSON.parse(data);
           
           for (let i = 0; i < dbData.length; i++) {
@@ -69,7 +64,7 @@ const fs = require('fs');
             if (err) throw err;
           });
         });
-        // Express response.status(204)
+       
         res.status(204).send();
       });
       module.exports = router 

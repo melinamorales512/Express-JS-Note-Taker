@@ -5,17 +5,18 @@ const PORT = process.env.PORT || 3001;
 const apiRoutes = require('./routes/apiroutes');
 const htmlRoutes = require('./routes/htmlroutes');
 
-// Parse URL encoded & JSON
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Host public folder
+//  public folder
 app.use(express.static('public'));
 
-// Use apiRoutes
+//  apiRoutes
 app.use(apiRoutes);
 app.use('/', htmlRoutes);
 
+//listener
 app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}!`);
 });
